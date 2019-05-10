@@ -48,3 +48,8 @@ export * from './bytes'
  * Function for definining properties on an object
  */
 export * from './object'
+
+/**
+ * Function for axlsign
+ */
+export * from './axlsign'

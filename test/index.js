@@ -720,3 +720,18 @@ describe('message sig', function () {
     })
   })
 })
+
+describe('axlsign sharekey', function () {
+
+  it('should calculate key agreement', function() {
+    let privateA = new Uint8Array(Buffer.from('e86551f9a0bd3c29cd53575a36036341435d40f86cda6ba27ddfee968a0c6154',"hex"));
+    let publicA  = new Uint8Array(Buffer.from('abe5ba31df1ccb9be82eabe005c8b833ceeb577f27a2cd11c90ba5f60bcd4451','hex'));
+    let privateB = new Uint8Array(Buffer.from('98d60d99d81c82779c91d42e5e7090ef1233ea2a30c86b83b48c09319329c25b','hex'));
+    let publicB  = new Uint8Array(Buffer.from('29de8cf231dd9c0a90b516edf7305eb60de21887968dae6c4c8f1edf9d4cff40','hex'));
+
+    var sk1 = ethUtils.ecdh25519computesecret(privateA, publicB);
+    var sk2 = ethUtils.ecdh25519computesecret(privateB, publicA);
+
+    assert.equal(sk1,sk2);
+});
+})
