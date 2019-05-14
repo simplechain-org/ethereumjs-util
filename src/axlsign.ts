@@ -9,7 +9,7 @@ function buf2hex(buffer: Buffer) {
     .join('')
 }
 
-export const ecdh25519computesecret = function(secretKey: Buffer, publicKey: Buffer) {
+export const x25519key = function(secretKey: Buffer, publicKey: Buffer) {
   var sharedKey = axlsign.sharedKey(secretKey, publicKey)
   return buf2hex(sharedKey)
 }
