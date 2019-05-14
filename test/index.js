@@ -729,8 +729,8 @@ describe('axlsign sharekey', function () {
     let privateB = new Uint8Array(Buffer.from('98d60d99d81c82779c91d42e5e7090ef1233ea2a30c86b83b48c09319329c25b','hex'));
     let publicB  = new Uint8Array(Buffer.from('29de8cf231dd9c0a90b516edf7305eb60de21887968dae6c4c8f1edf9d4cff40','hex'));
 
-    var sk1 = ethUtils.ecdh25519computesecret(privateA, publicB);
-    var sk2 = ethUtils.ecdh25519computesecret(privateB, publicA);
+    var sk1 = ethUtils.x25519key(privateA, publicB);
+    var sk2 = ethUtils.x25519key(privateB, publicA);
 
     assert.equal(sk1,sk2);
 });
