@@ -6,7 +6,18 @@ const assert = require('assert')
 const createHash = require('create-hash')
 const Buffer = require('safe-buffer').Buffer
 const ethjsUtil = require('ethjs-util')
+const axlsign = require('axlsign')
 Object.assign(exports, ethjsUtil)
+
+export const x25519key = function(secretKey: Buffer, publicKey: Buffer) {
+  let sharedKey = axlsign.sharedKey(secretKey, publicKey)
+  return sharedKey
+}
+
+export const x25519pub = function(privateKey: Buffer) {
+  let publicKey = axlsign.derivePublicKey(privateKey)
+  return publicKey
+}
 
 export interface ECDSASignature {
   v: number

@@ -676,3 +676,36 @@ describe('message sig', function () {
     })
   })
 })
+
+describe('axlsign sharekey', function () {
+
+  function buf2hex(buffer) {
+    // buffer is an ArrayBuffer
+    return Array.prototype.map
+      .call(new Uint8Array(buffer), function(x) {
+        return ('00' + x.toString(16)).slice(-2)
+      })
+      .join('')
+  }
+
+  let privateA = (Buffer.from('e86551f9a0bd3c29cd53575a36036341435d40f86cda6ba27ddfee968a0c6154',"hex"));
+  let publicA  = (Buffer.from('abe5ba31df1ccb9be82eabe005c8b833ceeb577f27a2cd11c90ba5f60bcd4451','hex'));
+  let privateB = (Buffer.from('98d60d99d81c82779c91d42e5e7090ef1233ea2a30c86b83b48c09319329c25b','hex'));
+  let publicB  = (Buffer.from('29de8cf231dd9c0a90b516edf7305eb60de21887968dae6c4c8f1edf9d4cff40','hex'));
+
+  it('should calculate key agreement', function() {
+    let sk1 = ethUtils.x25519key(privateA, publicB);
+    let sk2 = ethUtils.x25519key(privateB, publicA);
+
+    assert.equal(buf2hex(sk1), buf2hex(sk2));
+  });
+
+  it('should generate public key', function() {
+    let sk1 = ethUtils.x25519pub(privateA)
+    let sk2 = ethUtils.x25519pub(privateB)
+
+    assert.equal(buf2hex(sk1), publicA.toString('hex'));
+    assert.equal(buf2hex(sk2), publicB.toString('hex'));
+  });
+})
+
