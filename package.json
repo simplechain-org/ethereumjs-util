@@ -1,5 +1,5 @@
 {
-  "name": "simplechain-util",
+  "name": "simplechainjs-util",
   "version": "6.1.2-sipc",
   "description": "a collection of utility functions for Simplechain",
   "main": "dist/index.js",
